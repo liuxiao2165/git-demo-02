@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="jquery-3.1.1.js"></script>
+
+    <style>
+        div {
+            border: 1px solid pink;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+
+    <script>
+        $(function () {
+
+            //绑定一个事件
+            $("button").eq(0).bind("click",function () {
+               alert("触发事件");
+            });
+
+            //绑定两个事件,处理同一个函数
+            $("button").eq(1).bind("click mouseenter",function () {
+               alert("两个事件");
+            });
+
+            //绑定两个事件,处理两个函数
+            $("button").eq(2).bind({
+                "click":function () {
+                    alert("click事件");
+                },
+                "mouseenter":function () {
+                    alert("mouseenter事件");
+                }
+            });
+
+            //绑定事件,只触发一次
+            $("button").eq(3).one("click",function () {
+                alert("触发一次");
+            });
+
+            //通过delete绑定事件
+            $("ul").delegate("li","click",function () {
+               alert($(this).html());
+            });
+
+            //on 综合所有,推荐使用
+            $("div").on("click","p:eq(0)",function () {
+               alert("这是on");
+            });
+
+            //on对应的解绑事件 off
+            $("div").off("click");
+
+        });
+    </script>
+</head>
+<body>
+<button>绑定一个事件</button>
+<button>绑定两个事件</button>
+<button>绑定两个不同事件</button>
+<button>绑定事件,只触发一次</button>
+
+<div>
+    <p>这是第一个p</p>
+    <p>这是第二个p</p>
+    <p>这是第三个p</p>
+</div>
+
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+</ul>
+</body>
+</html>
